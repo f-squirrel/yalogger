@@ -15,28 +15,26 @@
 
 namespace ya {
 
-char* format_message(LEVEL level, const char* message) {
-    using namespace boost::posix_time;
-    char* level_str = nullptr;
+const char_t* get_level_string(LEVEL level) {
     switch (level) {
         case Debug:
-            level_str = const_cast<char*>("DEBUG");
-            break;
+            return TEXT("DEBUG");
         case Info:
-            level_str = const_cast<char*>("INFO");
-            break;
+            return TEXT("INFO");
         case Warning:
-            level_str = const_cast<char*>("WARNING");
-            break;
+            return TEXT("WARNING");
         case Error:
-            level_str = const_cast<char*>("ERROR");
-            break;
+            return TEXT("ERROR");
         default:
-            level_str = const_cast<char*>("UNKNOWN");
-            break;
+            return TEXT("UNKNOWN");
     }
-    const std::string& time_str = to_iso_extended_string(microsec_clock::local_time());
-    char* out_message = new char[ strlen(level_str) + strlen(message) + time_str.length() +  50 ];
+}
+
+char* format_message(LEVEL level, const char* message) {
+    using namespace boost::posix_time;
+    const char* level_str = get_level_string(level);
+    const string_t& time_str = to_iso_extended_string_type<char_t>(microsec_clock::local_time());
+    char_t* out_message = new char_t[ strlen(level_str) + strlen(message) + time_str.length() +  50 ];
     sprintf(out_message, "%s %s  %s", time_str.c_str(), level_str, message);
     return  out_message;
 }
