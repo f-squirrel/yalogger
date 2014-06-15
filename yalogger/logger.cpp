@@ -8,12 +8,6 @@
 
 #include "logger.h"
 #include "impl.h"
-#include "logger_exception.h"
-#include "file_options.h"
-#include <thread>
-#include <sstream>
-#include <fstream>
-#include <boost/date_time.hpp>
 
 namespace ya {
 
