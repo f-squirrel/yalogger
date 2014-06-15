@@ -19,6 +19,7 @@ public:
     logger_impl(const file_options& fo, const LEVEL& log_level);
     ~logger_impl();
     void log(LEVEL level, const char_t* message);
+    void log(LEVEL level, const string_t& message);
     void close();
     
     logger_impl(const logger_impl& ) = delete;

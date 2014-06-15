@@ -23,7 +23,7 @@ writer::writer(const file_options& options, message_queue_ptr_t queue, std::shar
 
 void writer::operator()() {
     while(!(*m_finish)) {
-        char* value = nullptr;
+        char_t* value = nullptr;
         while(m_queue->pop(value)) {
             //std::cout << value << std::endl;
             m_ofstream << value << std::endl;
@@ -32,7 +32,7 @@ void writer::operator()() {
             value = nullptr;
         }
     }
-    char* value = nullptr;
+    char_t* value = nullptr;
     while(m_queue->pop(value)) {
         //std::cout << value << std::endl;
         if (!m_options.is_stop_immediately()) {

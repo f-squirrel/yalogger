@@ -24,9 +24,13 @@ enum LEVEL {
 #if defined (WIN32) && defined(UNICODE)
 typedef wchar_t char_t;
 #define TEXT(quote) L##quote
+#define __snprintf swprintf
+#define __strlen wcslen
 #else
 typedef char char_t;
 #define TEXT(quote) quote
+#define __snprintf snprintf
+#define __strlen strlen
 #endif
 
 typedef std::basic_string<char_t> string_t;
