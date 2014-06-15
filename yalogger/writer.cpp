@@ -9,7 +9,7 @@
 #include "writer.h"
 #include "file_options.h"
 #include "logger_exception.h"
-#include <iostream>
+//#include <iostream>
 
 namespace ya {
 

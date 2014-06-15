@@ -10,17 +10,10 @@
 #define __yalogger__impl__
 
 #include "scoped_thread_guard.h"
-#include "file_options.h"
 #include "lock_free_mq.h"
-#include "writer.h"
-#include <fstream>
-#include <string>
-#include <iostream>
-#include <atomic>
-#include <thread>
-#include <memory>
 
 namespace ya {
+class file_options;
 class logger_impl {
 public:
     logger_impl(const file_options& fo, const LEVEL& log_level);
@@ -34,7 +27,7 @@ private:
     void send_msg_to_writer(char_t* message);
 private:
     message_queue_t m_message_queue;
-    std::shared_ptr<flag_t> m_finish;
+    flag_ptr_t m_finish;
     scoped_thread_guard m_thread_g;
     LEVEL m_min_level;
 };

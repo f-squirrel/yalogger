@@ -9,7 +9,7 @@
 #include "impl.h"
 #include "logger_exception.h"
 #include "file_options.h"
-#include <thread>
+#include "writer.h"
 #include <sstream>
 #include <fstream>
 #include <boost/date_time.hpp>

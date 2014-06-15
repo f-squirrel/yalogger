@@ -11,11 +11,13 @@
 
 #include "defs.h"
 #include <atomic>
+#include <memory>
 #include <boost/lockfree/queue.hpp>
 
 namespace ya {
 typedef boost::lockfree::queue<char_t*> message_queue_t;
 typedef std::atomic<bool> flag_t;
+typedef std::shared_ptr<flag_t> flag_ptr_t;
 }
 
 #endif
