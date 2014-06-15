@@ -27,6 +27,7 @@ public:
     logger(const file_options& fo, const LEVEL& log_level);
     ~logger();
     void log(LEVEL level, const char_t* message);
+    void log(LEVEL level, const string_t& message);
     void close();
     
     logger(const logger& ) = delete;

@@ -15,7 +15,7 @@
 #include <boost/date_time.hpp>
 
 namespace ya {
-    
+
 char* format_message(LEVEL level, const char* message) {
     using namespace boost::posix_time;
     char* level_str = nullptr;
