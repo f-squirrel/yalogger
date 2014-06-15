@@ -6,13 +6,15 @@
 //  Copyright (c) 2013 Dmitry Danilov. All rights reserved.
 //
 
+#include "logger.h"
+#include "file_options.h"
+#include "logger_exception.h"
+
 #include <iostream>
 #include <thread>
 #include <sstream>
 #include <chrono>
 #include <vector>
-#include "logger.h"
-#include "defs.h"
 
 const ya::string_t filename = TEXT("/Users/skyjack/Projects/c++/yalogger/file.log");
 ya::file_options opt(filename, std::ios::ate | std::ios::app);

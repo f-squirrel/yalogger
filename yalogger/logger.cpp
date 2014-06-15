@@ -7,6 +7,7 @@
 //
 
 #include "logger.h"
+#include "impl.h"
 #include "logger_exception.h"
 #include "file_options.h"
 #include <thread>
@@ -17,6 +18,9 @@
 namespace ya {
 
 logger::logger(const file_options& fo, const LEVEL& log_level) : m_pimpl(new logger_impl(fo, log_level)) {
+}
+
+logger::~logger() {        
 }
 
 void logger::log(LEVEL level, const char_t* message) {

@@ -9,7 +9,8 @@
 #ifndef __logger__logger__
 #define __logger__logger__
 
-#include "impl.h"
+//#include "impl.h"
+#include "defs.h"
 #include <memory>
 
 //TODO:
@@ -19,11 +20,12 @@
 // 4. add template
 
 namespace ya {
-
+class logger_impl;
+class file_options;
 class logger {
 public:
     logger(const file_options& fo, const LEVEL& log_level);
-    ~logger() = default;
+    ~logger();
     void log(LEVEL level, const char_t* message);
     void close();
     
