@@ -32,16 +32,16 @@ void writer::operator()() {
             value = nullptr;
         }
     }
-    if (!m_options.is_stop_immediately()) {
-        char*  value = nullptr;
-        while(m_queue->pop(value)) {
+    char* value = nullptr;
+    while(m_queue->pop(value)) {
             //std::cout << value << std::endl;
-            m_ofstream << value << std::endl;
-            m_ofstream.flush();
+            if (!m_options.is_stop_immediately()) {
+                m_ofstream << value << std::endl;
+                m_ofstream.flush();
+            }
             delete [] value;
             value = nullptr;
         }
-    }
     close();
     delete this;
 }
