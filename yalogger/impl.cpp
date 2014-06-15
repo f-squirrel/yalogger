@@ -72,7 +72,7 @@ void logger_impl::log(LEVEL level, const char_t* message) {
     if (level < m_min_level) {
         return;
     }
-    char* formatted_msg = format_message(level, message);
+    char_t* formatted_msg = format_message(level, message);
     send_msg_to_writer(formatted_msg);
 }
 
