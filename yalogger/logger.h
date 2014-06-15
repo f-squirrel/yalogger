@@ -9,15 +9,7 @@
 #ifndef __logger__logger__
 #define __logger__logger__
 
-#include "scoped_thread_guard.h"
-#include "file_options.h"
-#include "lock_free_mq.h"
-#include "writer.h"
-#include <fstream>
-#include <string>
-#include <iostream>
-#include <atomic>
-#include <thread>
+#include "impl.h"
 #include <memory>
 
 //TODO:
@@ -31,19 +23,14 @@ namespace ya {
 class logger {
 public:
     logger(const file_options& fo, const LEVEL& log_level);
-    ~logger();
+    ~logger() = default;
     void log(LEVEL level, const char_t* message);
     void close();
     
     logger(const logger& ) = delete;
     logger& operator = (const logger&) = delete;
 private:
-    void send_msg_to_writer(char_t* message);
-private:
-    message_queue_t m_message_queue;
-    std::shared_ptr<flag_t> m_finish;
-    scoped_thread_guard m_thread_g;
-    LEVEL m_min_level;
+    std::unique_ptr<logger_impl> m_pimpl;
 };
 
 }
