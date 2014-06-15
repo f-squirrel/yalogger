@@ -21,7 +21,6 @@ enum LEVEL {
     Error   = 0x4
 };
 
-
 #if defined (WIN32) && defined(UNICODE)
 typedef wchar_t char_t;
 #define TEXT(quote) L##quote

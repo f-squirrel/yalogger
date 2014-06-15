@@ -13,7 +13,6 @@
 #include <ios>
 
 namespace ya {
-
 class file_options {
 public:
     file_options() : m_filename(TEXT("")), m_open_mode(std::ios_base::ate | std::ios_base::app) {}

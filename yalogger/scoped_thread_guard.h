@@ -13,7 +13,6 @@
 #include <thread>
 
 namespace ya {
-
 class scoped_thread_guard {
     std::thread m_thread;
 public:

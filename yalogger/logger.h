@@ -35,8 +35,6 @@ public:
 private:
     std::unique_ptr<logger_impl> m_pimpl;
 };
-
 }
-
 
 #endif /* defined(__logger__logger__) */
