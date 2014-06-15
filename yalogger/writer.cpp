@@ -24,7 +24,7 @@ writer::writer(const file_options& options, message_queue_t& queue, std::shared_
 
 void writer::operator()() {
     while(!(*m_finish)) {
-        char*  value = nullptr;
+        char* value = nullptr;
         while(m_queue.pop(value)) {
             //std::cout << value << std::endl;
             m_ofstream << value << std::endl;

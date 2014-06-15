@@ -18,10 +18,10 @@ class scoped_thread_guard {
     std::thread m_thread;
 public:
     void set_thread(std::thread t) {
-        m_thread = std::move(t);
-        if( !m_thread.joinable() ) {
+        if( !t.joinable() ) {
             throw logger_exception("Thread is not joinable");
         }
+        m_thread = std::move(t);
     }
     ~scoped_thread_guard() {
         m_thread.join();
