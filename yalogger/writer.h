@@ -16,7 +16,7 @@ namespace ya {
 class file_options;
 class writer {
 public:
-    writer(const file_options& options, message_queue_ptr_t queue, std::shared_ptr<flag_t> finish);
+    writer(const file_options& options, message_queue_ptr_t queue, flag_ptr_t finish);
     ~writer();
     void operator()();
     writer(const writer&) = delete;

@@ -21,7 +21,7 @@ void logger::log(LEVEL level, const char_t* message) {
     m_pimpl->log(level, message);
 }
 
-void logger::log(LEVEL level, const string_t &message) {
+void logger::log(LEVEL level, const string_t& message) {
     m_pimpl->log(level, message);
 }
 void logger::close() {
