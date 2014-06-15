@@ -16,6 +16,7 @@
 
 namespace ya {
 typedef boost::lockfree::queue<char_t*> message_queue_t;
+typedef std::shared_ptr<message_queue_t> message_queue_ptr_t;
 typedef std::atomic<bool> flag_t;
 typedef std::shared_ptr<flag_t> flag_ptr_t;
 }

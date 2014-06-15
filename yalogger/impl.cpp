@@ -44,11 +44,14 @@ char* format_message(LEVEL level, const char* message) {
     return  out_message;
 }
 
-logger_impl::logger_impl(const file_options& fo, const LEVEL& log_level) : m_min_level(log_level), m_message_queue(1024) {
+logger_impl::logger_impl(const file_options& fo, const LEVEL& log_level) :
+    m_min_level(log_level),
+    m_finish(std::make_shared<flag_t>(false)),
+    m_message_queue(std::make_shared<message_queue_t>(1024))
+{
     if (fo.filename().empty()) {
         throw logger_exception("Failed to init logger_impl: empty filename");
     }
-    m_finish = std::make_shared<flag_t>(false);
     ya::writer* writer = new ya::writer(fo, m_message_queue, m_finish);
     m_thread_g.set_thread(std::thread(std::ref(*writer)));
 }
@@ -72,7 +75,7 @@ void logger_impl::send_msg_to_writer(char* message) {
     if (!message) {
         return;
     }
-    m_message_queue.push(message);
+    m_message_queue->push(message);
 }
 
 void logger_impl::close() {

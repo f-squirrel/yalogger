@@ -26,7 +26,7 @@ public:
 private:
     void send_msg_to_writer(char_t* message);
 private:
-    message_queue_t m_message_queue;
+    message_queue_ptr_t m_message_queue;
     flag_ptr_t m_finish;
     scoped_thread_guard m_thread_g;
     LEVEL m_min_level;

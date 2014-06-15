@@ -11,11 +11,12 @@
 
 #include "defs.h"
 #include "lock_free_mq.h"
+#include "file_options.h"
 namespace ya {
 class file_options;
 class writer {
 public:
-    writer(const file_options& options, message_queue_t& queue, std::shared_ptr<flag_t> finish);
+    writer(const file_options& options, message_queue_ptr_t queue, std::shared_ptr<flag_t> finish);
     ~writer();
     void operator()();
     writer(const writer&) = delete;
@@ -24,8 +25,9 @@ private:
     void close();
 private:
     flag_ptr_t m_finish;
-    message_queue_t& m_queue;
+    message_queue_ptr_t m_queue;
     ofstream_t m_ofstream;
+    file_options m_options;
 };
 }
 #endif /* defined(__yalogger__writer__) */
