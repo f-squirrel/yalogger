@@ -35,9 +35,7 @@ char* format_message(LEVEL level, const char* message) {
             level_str = const_cast<char*>("UNKNOWN");
             break;
     }
-    ptime timesatmp =  microsec_clock::local_time();
-    std::string time_str = to_iso_extended_string(timesatmp);
-    
+    const std::string& time_str = to_iso_extended_string(microsec_clock::local_time());
     char* out_message = new char[ strlen(level_str) + strlen(message) + time_str.length() +  50 ];
     sprintf(out_message, "%s %s  %s", time_str.c_str(), level_str, message);
     return  out_message;
