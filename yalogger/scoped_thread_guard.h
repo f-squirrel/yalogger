@@ -16,6 +16,8 @@ namespace ya {
 class scoped_thread_guard {
     std::thread m_thread;
 public:
+    scoped_thread_guard(std::thread t) : m_thread(std::move(t)) {}
+    
     void set_thread(std::thread t) {
         if( !t.joinable() ) {
             throw logger_exception("Thread is not joinable");
@@ -26,6 +28,6 @@ public:
         m_thread.join();
     }
 };
-    
+
 }
 #endif

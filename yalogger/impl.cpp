@@ -58,7 +58,8 @@ logger_impl::logger_impl(const file_options& fo, const LEVEL& log_level) :
         throw logger_exception("Failed to init logger_impl: empty filename");
     }
     ya::writer* writer = new ya::writer(fo, m_message_queue, m_finish);
-    m_thread_g.set_thread(std::thread(std::ref(*writer)));
+    m_thread_g = scoped_thread_guard_ptr_t( new scoped_thread_guard(std::thread(std::ref(*writer))) );
+//    m_thread_g.set_thread(std::thread(std::ref(*writer)));
 }
 
 logger_impl::~logger_impl() {

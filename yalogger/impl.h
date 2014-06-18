@@ -29,7 +29,8 @@ private:
 private:
     message_queue_ptr_t m_message_queue;
     flag_ptr_t m_finish;
-    scoped_thread_guard m_thread_g;
+    typedef std::unique_ptr<scoped_thread_guard> scoped_thread_guard_ptr_t;
+    scoped_thread_guard_ptr_t m_thread_g;
     LEVEL m_min_level;
 };
 }
