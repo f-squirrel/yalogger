@@ -16,7 +16,7 @@
 #include <chrono>
 #include <vector>
 
-const ya::string_t filename = TEXT("/Users/skyjack/Projects/c++/yalogger/file.log");
+const ya::string_t filename = TEXT("file.log");
 ya::file_options opt(filename, std::ios::ate | std::ios::app, false);
 
 ya::logger logger(opt, ya::Debug);
