@@ -15,9 +15,8 @@ namespace ya {
 writer::writer(const file_options& options, message_queue_ptr_t queue, flag_ptr_t finish) :
     m_queue(queue), m_finish(finish) {
     m_ofstream.open(options.filename().c_str(), options.mode());
-    if (!m_ofstream.is_open()) {
+    if (!m_ofstream.is_open())
         throw logger_exception("Failed to open file");
-    }
     std::cout << "current queue is lock-free?: " << std::boolalpha << m_queue->is_lock_free() << std::endl;
 }
 
@@ -52,8 +51,7 @@ void writer::close() {
 }
 
 writer::~writer() {
-    if(m_ofstream.is_open()) {
+    if(m_ofstream.is_open())
         close();
-    }
 }
 }

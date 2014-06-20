@@ -19,9 +19,8 @@ public:
     scoped_thread_guard(std::thread t) : m_thread(std::move(t)) {}
     
     void set_thread(std::thread t) {
-        if( !t.joinable() ) {
+        if( !t.joinable() )
             throw logger_exception("Thread is not joinable");
-        }
         m_thread = std::move(t);
     }
     ~scoped_thread_guard() {

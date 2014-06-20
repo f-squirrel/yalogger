@@ -54,9 +54,8 @@ logger_impl::logger_impl(const file_options& fo, const LEVEL& log_level) :
     m_min_level(log_level), m_finish(std::make_shared<flag_t>(false)),
     m_message_queue(std::make_shared<message_queue_t>(1024))
 {
-    if (fo.filename().empty()) {
+    if (fo.filename().empty())
         throw logger_exception("Failed to init logger_impl: empty filename");
-    }
     ya::writer* writer = new ya::writer(fo, m_message_queue, m_finish);
     m_thread_g = scoped_thread_guard_ptr_t( new scoped_thread_guard(std::thread(std::ref(*writer))) );
 //    m_thread_g.set_thread(std::thread(std::ref(*writer)));
@@ -64,31 +63,27 @@ logger_impl::logger_impl(const file_options& fo, const LEVEL& log_level) :
 
 logger_impl::~logger_impl() {
     std::cout << "dtor logger_impl\n";
-    if (!(*m_finish)) {
+    if (!(*m_finish))
         close();
-    }
 }
 
 void logger_impl::log(LEVEL level, const char_t* message) {
-    if (level < m_min_level) {
+    if (level < m_min_level)
         return;
-    }
     char_t* formatted_msg = format_message(level, message);
     send_msg_to_writer(formatted_msg);
 }
 
 void logger_impl::log(LEVEL level, const string_t& message) {
-    if (level < m_min_level) {
+    if (level < m_min_level)
         return;
-    }
     char_t* formatted_msg = format_message(level, message);
     send_msg_to_writer(formatted_msg);
 }
 
 void logger_impl::send_msg_to_writer(char_t* message) {
-    if (!message) {
+    if (!message)
         return;
-    }
     m_message_queue->push(message);
 }
 
