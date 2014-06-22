@@ -8,7 +8,6 @@
 
 #include "writer.h"
 #include "logger_exception.h"
-//#include <iostream>
 
 namespace ya {
 
@@ -17,14 +16,12 @@ writer::writer(const file_options& options, message_queue_ptr_t queue, flag_ptr_
     m_ofstream.open(options.filename().c_str(), options.mode());
     if (!m_ofstream.is_open())
         throw logger_exception("Failed to open file");
-    std::cout << "current queue is lock-free?: " << std::boolalpha << m_queue->is_lock_free() << std::endl;
 }
 
 void writer::operator()() {
     while(!(*m_finish)) {
         char_t* value = nullptr;
         while(m_queue->pop(value)) {
-            //std::cout << value << std::endl;
             m_ofstream << value << std::endl;
             m_ofstream.flush();
             delete[] value;
@@ -33,7 +30,6 @@ void writer::operator()() {
     }
     char_t* value = nullptr;
     while(m_queue->pop(value)) {
-        //std::cout << value << std::endl;
         if (!m_options.is_stop_immediately()) {
             m_ofstream << value << std::endl;
             m_ofstream.flush();
@@ -46,7 +42,6 @@ void writer::operator()() {
 }
 
 void writer::close() {
-    std::cout << "close writer\n";
     m_ofstream.close();
 }
 
